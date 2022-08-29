@@ -9,3 +9,4 @@ obj-y += spl.o
 else
 obj-y += unmatched.o
 endif
+obj-y += pwm.o

@@ -22,6 +22,12 @@ void *board_fdt_blob_setup(int *err)
 	return (ulong *)&_end;
 }
 
+int board_early_init_f(void)
+{
+	pwm_device_init();
+	return 0;
+}
+
 int board_init(void)
 {
 	/* enable all cache ways */

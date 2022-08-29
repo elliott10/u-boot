@@ -412,7 +412,17 @@ config SYS_I2C_EEPROM_ADDR
 	depends on ID_EEPROM || I2C_EEPROM || SPL_I2C_EEPROM || CMD_EEPROM || ENV_IS_IN_EEPROM
 	default 0
 
+config SYS_I2C_TMP451_ADDR
+	hex "Chip address of the TMP451 device"
+	default 0
+
 if I2C_EEPROM
+
+config SYS_I2C_TMP451_ADDR_LEN
+	int "Length in bytes of the TMP451 memory array address"
+	default 1
+	help
+	  Note: This is NOT the chip address length!
 
 config SYS_I2C_EEPROM_ADDR_OVERFLOW
 	hex "EEPROM Address Overflow"
