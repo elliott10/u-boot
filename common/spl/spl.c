@@ -463,6 +463,7 @@ int spl_early_init(void)
 	int ret;
 
 	debug("%s\n", __func__);
+	printf("%s\n", __func__);
 
 	ret = spl_common_init(true);
 	if (ret)
@@ -575,6 +576,7 @@ static int boot_from_devices(struct spl_image_info *spl_image,
 #if defined(CONFIG_SPL_FRAMEWORK_BOARD_INIT_F)
 void board_init_f(ulong dummy)
 {
+	printf("%s: %s\n", __FILE__, __func__);
 	if (CONFIG_IS_ENABLED(OF_CONTROL)) {
 		int ret;
 

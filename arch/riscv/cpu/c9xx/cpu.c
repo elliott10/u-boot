@@ -19,6 +19,7 @@ void (*image_entry)(u32, phys_addr_t);
 extern bootm_headers_t images;
 static inline void boot_core_vector(void)
 {
+	printf("%s: %s\n", __FILE__, __func__);
 	csr_set(0x7cc, 0x003fc0c0|csr_read(0x7cc));
 
 	/* Set pmp regs */

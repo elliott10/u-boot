@@ -6,6 +6,8 @@
  * Rick Chen, Andes Technology Corporation <rick@andestech.com>
  */
 
+#define DEBUG
+
 #include <common.h>
 #include <command.h>
 #include <dm.h>
@@ -85,6 +87,9 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 #ifdef CONFIG_SMP
 	int ret;
 #endif
+	printf("\r\n");
+	print_cur_riscv_mode();
+	printf("%s, opensbi_addr: %s\n", __func__, env_get("opensbi_addr"));
 
 	kernel = (void (*)(ulong, void *))simple_strtol(env_get("opensbi_addr"), NULL, 0);
 
@@ -103,6 +108,9 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 			if (ret)
 				hang();
 #endif
+
+			printf("%s, boot_hart: %d, ft_addr: %#lx, pmpaddr0=%#lx, pmpaddr0=%#lx\n", __func__, gd->arch.boot_hart, (ulong)images->ft_addr, csr_read(pmpcfg0), csr_read(pmpaddr0));
+
 			kernel(gd->arch.boot_hart, images->ft_addr);
 		}
 	}

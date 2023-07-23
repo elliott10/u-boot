@@ -275,6 +275,7 @@ void show_sys_clk(void)
 
 int board_init(void)
 {
+	printf("%s: %s\n", __FILE__, __func__);
 	gmac_hw_init();
 	usb_hw_init();
 	gpu_config();

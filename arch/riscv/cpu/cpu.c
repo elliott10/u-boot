@@ -103,3 +103,27 @@ int arch_early_init_r(void)
 {
 	return riscv_cpu_probe();
 }
+
+static inline unsigned long get_cur_riscv_mode(void)
+{
+	return (csr_read(sxstatus) >> 30) & 0x3;
+}
+
+int print_cur_riscv_mode(void)
+{
+	unsigned long mode = 0;
+	unsigned long satp = 0;
+
+	mode = get_cur_riscv_mode();
+	switch(mode){
+		case PRV_M: printf("Cur Riscv Mode: %lu PRV_M\n", mode); break;
+		case PRV_H: printf("Cur Riscv Mode: %lu PRV_H\n", mode); break;
+		case PRV_S: printf("Cur Riscv Mode: %lu PRV_S\n", mode); break;
+		default: printf("Cur Riscv Mode: %lu \n", mode); break;
+	}
+
+	satp = csr_read(CSR_SATP);
+	printf("SATP: 0x%lx \n", satp);
+
+	return mode;
+}

@@ -31,11 +31,11 @@ static inline int initcall_run_list(const init_fnc_t init_sequence[])
 		reloc_ofs = (unsigned long)image_base;
 #endif
 		if (reloc_ofs)
-			debug("initcall: %p (relocated to %p)\n",
+			printf("initcall: %p (relocated to %p)\n",
 					(char *)*init_fnc_ptr - reloc_ofs,
 					(char *)*init_fnc_ptr);
 		else
-			debug("initcall: %p\n", (char *)*init_fnc_ptr - reloc_ofs);
+			printf("initcall: %p\n", (char *)*init_fnc_ptr - reloc_ofs);
 
 		ret = (*init_fnc_ptr)();
 		if (ret) {
